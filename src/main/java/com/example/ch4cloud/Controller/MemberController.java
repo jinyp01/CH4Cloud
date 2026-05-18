@@ -5,7 +5,6 @@ import com.example.ch4cloud.Dto.Response.GetMemberResponseDto;
 import com.example.ch4cloud.Dto.Response.SaveMemberResponseDto;
 import com.example.ch4cloud.Service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
