@@ -1,10 +1,13 @@
 package com.example.ch4cloud.Entity;
 
+import com.example.ch4cloud.Dto.Request.SaveMemberRequestDto;
 import jakarta.persistence.*;
+import lombok.Getter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name = "members")
+@Getter
 @EntityListeners(AuditingEntityListener.class)
 public class Member {
 
@@ -23,6 +26,8 @@ public class Member {
         this.age = age;
         this.mbti = mbti;
     }
+
+
 
     public Member() {
 
