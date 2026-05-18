@@ -25,8 +25,8 @@ public class MemberController {
     }
 
     @GetMapping("/api/members/{memberId}")
-    ResponseEntity<GetMemberResponseDto> getMember(@PathVariable Long id){
-        GetMemberResponseDto response = memberService.getOne(id);
+    ResponseEntity<GetMemberResponseDto> getMember(@PathVariable Long memberId){
+        GetMemberResponseDto response = memberService.getOne(memberId);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

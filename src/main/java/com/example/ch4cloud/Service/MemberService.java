@@ -5,6 +5,7 @@ import com.example.ch4cloud.Dto.Response.GetMemberResponseDto;
 import com.example.ch4cloud.Dto.Response.SaveMemberResponseDto;
 import com.example.ch4cloud.Entity.Member;
 import com.example.ch4cloud.Repository.MemberRepository;
+import com.example.ch4cloud.exception.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,7 @@ public class MemberService {
     @Transactional(readOnly = true)
     public GetMemberResponseDto getOne(Long id) {
         Member member = memberRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("멤버가 존재하지 않습니다")
+                MemberNotFoundException::new
         );
 
         return GetMemberResponseDto.from(member);
