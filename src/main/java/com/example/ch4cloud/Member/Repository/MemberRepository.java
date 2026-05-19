@@ -1,6 +1,6 @@
-package com.example.ch4cloud.Repository;
+package com.example.ch4cloud.Member.Repository;
 
-import com.example.ch4cloud.Entity.Member;
+import com.example.ch4cloud.Member.Entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
