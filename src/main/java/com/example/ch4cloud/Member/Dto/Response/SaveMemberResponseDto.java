@@ -1,7 +1,6 @@
-package com.example.ch4cloud.Dto.Response;
+package com.example.ch4cloud.Member.Dto.Response;
 
-import com.example.ch4cloud.Dto.Request.SaveMemberRequestDto;
-import com.example.ch4cloud.Entity.Member;
+import com.example.ch4cloud.Member.Entity.Member;
 import lombok.Getter;
 
 @Getter

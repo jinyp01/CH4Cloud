@@ -1,6 +1,6 @@
 package com.example.ch4cloud.Global;
 
-import com.example.ch4cloud.Dto.Response.CommonResponse;
+import com.example.ch4cloud.Member.Dto.Response.CommonResponse;
 import com.example.ch4cloud.exception.ServiceException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

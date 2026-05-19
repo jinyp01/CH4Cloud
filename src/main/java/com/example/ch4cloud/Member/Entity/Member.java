@@ -1,4 +1,4 @@
-package com.example.ch4cloud.Entity;
+package com.example.ch4cloud.Member.Entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -20,15 +20,11 @@ public class Member {
 
     private String mbti;
 
+    public Member() {}
+
     public Member(String name, Integer age, String mbti) {
         this.name = name;
         this.age = age;
         this.mbti = mbti;
-    }
-
-
-
-    public Member() {
-
     }
 }

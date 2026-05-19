@@ -1,4 +1,4 @@
-package com.example.ch4cloud.Dto.Request;
+package com.example.ch4cloud.Member.Dto.Request;
 
 import lombok.Getter;
 
@@ -10,6 +10,5 @@ public class SaveMemberRequestDto {
     int age;
 
     String mbti;
-
 
 }

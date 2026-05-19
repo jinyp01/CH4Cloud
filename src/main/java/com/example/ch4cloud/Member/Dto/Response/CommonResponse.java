@@ -1,4 +1,4 @@
-package com.example.ch4cloud.Dto.Response;
+package com.example.ch4cloud.Member.Dto.Response;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,10 +1,10 @@
-package com.example.ch4cloud.Service;
+package com.example.ch4cloud.Member.Service;
 
-import com.example.ch4cloud.Dto.Request.SaveMemberRequestDto;
-import com.example.ch4cloud.Dto.Response.GetMemberResponseDto;
-import com.example.ch4cloud.Dto.Response.SaveMemberResponseDto;
-import com.example.ch4cloud.Entity.Member;
-import com.example.ch4cloud.Repository.MemberRepository;
+import com.example.ch4cloud.Member.Dto.Request.SaveMemberRequestDto;
+import com.example.ch4cloud.Member.Dto.Response.GetMemberResponseDto;
+import com.example.ch4cloud.Member.Dto.Response.SaveMemberResponseDto;
+import com.example.ch4cloud.Member.Entity.Member;
+import com.example.ch4cloud.Member.Repository.MemberRepository;
 import com.example.ch4cloud.exception.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
