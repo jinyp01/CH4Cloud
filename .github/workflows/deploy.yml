@@ -37,30 +37,30 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      # ★ 추가
+      # Step 4: gradlew 실행 권한 부여
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      # Step 4: 테스트 실행
-      - name: Run tests
-        run: ./gradlew test
-
-      # Step 5: JAR 빌드
-      - name: Build JAR
-        run: ./gradlew bootJar
-
-      # Step 6: AWS 자격증명
+      # Step 5: AWS 자격증명 설정 (테스트 전에!)
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
           aws-region: ${{ vars.AWS_REGION }}
 
-      # Step 7: ECR 로그인
+      # Step 6: 테스트 실행
+      - name: Run tests
+        run: ./gradlew test
+
+      # Step 7: JAR 빌드
+      - name: Build JAR
+        run: ./gradlew bootJar
+
+      # Step 8: ECR 로그인
       - name: Login to ECR
         uses: aws-actions/amazon-ecr-login@v2
 
-      # Step 8: Docker 빌드 및 Push
+      # Step 9: Docker 빌드 및 Push
       - name: Build and push Docker image
         run: |
           SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
