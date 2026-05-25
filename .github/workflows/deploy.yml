@@ -41,7 +41,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      # Step 5: AWS 자격증명 설정 (테스트 전에!)
+      # Step 5: AWS 자격증명 설정
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -60,13 +60,12 @@ jobs:
       - name: Login to ECR
         uses: aws-actions/amazon-ecr-login@v2
 
-      # Step 9: Docker 빌드 및 Push
+      # Step 9: Docker 빌드 및 Push (latest만 사용)
       - name: Build and push Docker image
         run: |
-          SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
           IMAGE_URI=${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.${{ vars.AWS_REGION }}.amazonaws.com/${{ vars.ECR_REPOSITORY }}
 
-          docker build --platform linux/arm64 -t $IMAGE_URI:$SHORT_SHA .
-          docker push $IMAGE_URI:$SHORT_SHA
+          docker build --platform linux/arm64 -t $IMAGE_URI:latest .
+          docker push $IMAGE_URI:latest
 
-          echo "✅ Pushed: $IMAGE_URI:$SHORT_SHA"
+          echo "✅ Pushed: $IMAGE_URI:latest"
