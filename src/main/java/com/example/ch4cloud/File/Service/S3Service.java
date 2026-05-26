@@ -28,11 +28,16 @@ public class S3Service {
 
     public String upload(Long memberId, MultipartFile file) {
 
-        // 회원 존재 확인 (검증용)
+        // 1. member 존재 확인
         Member member = memberService.findMember(memberId);
 
+        // 2. 파일 검증 (추가 안전장치)
+        if (file == null || file.isEmpty()) {
+            throw new FileUploadFailException();
+        }
+
         try {
-            String key = "profile/" + memberId + "/"
+            String key = "uploads/" + memberId + "/"
                     + UUID.randomUUID() + "_"
                     + file.getOriginalFilename();
 
@@ -45,12 +50,15 @@ public class S3Service {
         }
     }
 
-    /**
-     * Presigned URL 생성 (7일)
-     */
+    // ✅ Presigned URL 생성
     public URL getDownloadUrl(Long memberId, String key) {
 
+        // member 존재 검증
         memberService.findMember(memberId);
+
+        if (key == null || key.isBlank()) {
+            throw new IllegalArgumentException("S3 key가 없습니다.");
+        }
 
         return s3Template.createSignedGetURL(
                 bucket,
