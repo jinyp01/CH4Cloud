@@ -9,13 +9,13 @@ public class SaveMemberResponseDto {
     private final Long id;
     private final String name;
     private final int age;
-    private final String mbit;
+    private final String mbti;
 
-    public SaveMemberResponseDto(Long id, String name, int age, String mbit) {
+    public SaveMemberResponseDto(Long id, String name, int age, String mbti) {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.mbit = mbit;
+        this.mbti = mbti;
     }
 
     public static SaveMemberResponseDto from(Member member){
