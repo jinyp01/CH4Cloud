@@ -11,11 +11,11 @@ public class GetMemberResponseDto {
     private final int age;
     private final String mbti;
 
-    public GetMemberResponseDto(Long id, String name, int age, String mbit) {
+    public GetMemberResponseDto(Long id, String name, int age, String mbti) {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.mbti = mbit;
+        this.mbti = mbti;
     }
 
     public static GetMemberResponseDto from(Member member) {
