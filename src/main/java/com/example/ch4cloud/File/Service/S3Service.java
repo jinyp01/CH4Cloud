@@ -1,5 +1,8 @@
 package com.example.ch4cloud.File.Service;
 
+import com.example.ch4cloud.Member.Entity.Member;
+import com.example.ch4cloud.Member.Service.MemberService;
+import com.example.ch4cloud.exception.FileUploadFailException;
 import io.awspring.cloud.s3.S3Template;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,25 +18,44 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class S3Service {
 
-    private static final Duration PRESIGNED_URL_EXPIRATION = Duration.ofMinutes(10);
+    private static final Duration PRESIGNED_URL_EXPIRATION = Duration.ofDays(7);
 
     private final S3Template s3Template;
+    private final MemberService memberService;
 
     @Value("${spring.cloud.aws.s3.bucket}")
     private String bucket;
 
-    public String upload(MultipartFile file) {
+    public String upload(Long memberId, MultipartFile file) {
+
+        // 회원 존재 확인 (검증용)
+        Member member = memberService.findMember(memberId);
+
         try {
-            String key = "uploads/" + UUID.randomUUID() + "_" + file.getOriginalFilename();
+            String key = "profile/" + memberId + "/"
+                    + UUID.randomUUID() + "_"
+                    + file.getOriginalFilename();
+
             s3Template.upload(bucket, key, file.getInputStream());
+
             return key;
+
         } catch (IOException e) {
-            // 적절한 커스텀 예외로 바꾸고, GlobalExceptionHandler로 핸들링 필요
-            throw new RuntimeException("파일 업로드 실패", e);
+            throw new FileUploadFailException();
         }
     }
 
-    public URL getDownloadUrl(String key) {
-        return s3Template.createSignedGetURL(bucket, key, PRESIGNED_URL_EXPIRATION);
+    /**
+     * Presigned URL 생성 (7일)
+     */
+    public URL getDownloadUrl(Long memberId, String key) {
+
+        memberService.findMember(memberId);
+
+        return s3Template.createSignedGetURL(
+                bucket,
+                key,
+                PRESIGNED_URL_EXPIRATION
+        );
     }
 }

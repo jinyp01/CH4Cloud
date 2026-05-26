@@ -16,6 +16,12 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    public Member findMember(Long id) {
+        return memberRepository.findById(id).orElseThrow(
+                MemberNotFoundException::new
+        );
+    }
+
     @Transactional
     public SaveMemberResponseDto save(SaveMemberRequestDto request) {
         Member member = new Member(request.getName(), request.getAge(), request.getMbti());
